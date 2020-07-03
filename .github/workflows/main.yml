@@ -11,6 +11,7 @@ jobs:
       matrix:
         operating-system: [ubuntu-latest]
         php-versions: ['7.1', '7.2']
+        db-versions: ['mysql:5.5','mysql:5.7']
         oxid-versions: ['dev-b-6.0-ce', 'dev-b-6.1-ce', 'dev-b-6.2-ce']
         exclude:
           - php-versions: '7.1'
@@ -18,7 +19,7 @@ jobs:
     name: Oxid ${{ matrix.oxid-versions }} on PHP ${{ matrix.php-versions }}
     services:
       mysql:
-        image: mysql:5.7.27
+        image: ${{ matrix.db-versions }}
         env:
           MYSQL_ROOT_PASSWORD: root
         ports:
