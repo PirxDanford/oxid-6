@@ -16,7 +16,7 @@ jobs:
         exclude:
           - php-versions: '7.1'
             oxid-versions: 'dev-b-6.2-ce'    
-    name: Oxid ${{ matrix.oxid-versions }} on PHP ${{ matrix.php-versions }}
+    name: Oxid ${{ matrix.oxid-versions }} on PHP ${{ matrix.php-versions }} and DB ${{ matrix.db-versions }}
     services:
       mysql:
         image: ${{ matrix.db-versions }}
@@ -48,6 +48,7 @@ jobs:
         mkdir /tmp/oxid6
         cd /tmp/oxid6
         composer create-project -n --no-progress oxid-esales/oxideshop-project . ${{ matrix.oxid-versions }}
+        composer require oxid-esales/oxideshop-demodata-ce:^v6.0.0
         cp /tmp/oxid6/source/config.inc.php.dist /tmp/oxid6/source/config.inc.php
         sed -i 's|<dbHost>|localhost|; s|<dbName>|oxideshop|; s|<dbUser>|root|; s|<dbPwd>|root|; s|<sShopURL>|http://localhost|; s|<sShopDir>|/tmp/oxid6/source|; s|<sCompileDir>|/tmp/oxid6/source/tmp|; s|\$this->iDebug = 0|\$this->iDebug = 1|' /tmp/oxid6/source/config.inc.php
         sed -i "s|\$this->edition = ''|\$this->edition = 'CE'|" /tmp/oxid6/source/config.inc.php
