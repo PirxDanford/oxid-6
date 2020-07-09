@@ -63,6 +63,7 @@ jobs:
         cp -R $GITHUB_WORKSPACE/* /tmp/oxid6/source/modules/fc/fcpayone
     - name: Reset shop
       run: |
+        cat /tmp/oxid6/test_config.yml
         php /tmp/oxid6/vendor/bin/reset-shop
     - name: Run tests
       # Run composer update to make services available, see #128
