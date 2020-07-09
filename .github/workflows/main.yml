@@ -20,6 +20,20 @@ jobs:
             oxid-versions: '6.2'
           - php-versions: '7.0'
             oxid-versions: '6.2'
+          - php-versions: '7.1'
+            oxid-versions: '6.0'
+          - php-versions: '7.2'
+            oxid-versions: '6.0'
+          - php-versions: '7.2'
+            oxid-versions: '6.1'
+          - php-versions: '7.3'
+            oxid-versions: '6.0'
+          - php-versions: '7.3'
+            oxid-versions: '6.1'
+          - php-versions: '7.4'
+            oxid-versions: '6.0'
+          - php-versions: '7.4'
+            oxid-versions: '6.1'
     name: Oxid ${{ matrix.oxid-versions }}/PHP ${{ matrix.php-versions }}/MySQL ${{ matrix.db-versions }}
     services:
       mysql:
