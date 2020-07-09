@@ -10,9 +10,12 @@ jobs:
       fail-fast: false
       matrix:
         operating-system: [ubuntu-latest]
-        php-versions: ['5.6', '7.0', '7.1', '7.2', '7.3', '7.4']
-        db-versions: ['5.5', '5.7']
-        oxid-versions: ['6.0', '6.1', '6.2']
+        #php-versions: ['5.6', '7.0', '7.1', '7.2', '7.3', '7.4']
+        php-versions: ['7.4']
+        #db-versions: ['5.5', '5.7']
+        db-versions: ['5.5']
+        #oxid-versions: ['6.0', '6.1', '6.2']
+        oxid-versions: ['6.2']
         exclude:
           - php-versions: '5.6'
             oxid-versions: '6.1'
@@ -84,7 +87,7 @@ jobs:
         export PARTIAL_MODULE_PATHS='fc/fcpayone'
         export SHOP_PATH='/tmp/oxid6/source'
         export ACTIVATE_ALL_MODULES=1
-        export RUN_TESTS_FOR_SHOP=0
+        export RUN_TESTS_FOR_SHOP=1
         export SHOP_SETUP_PATH='/tmp/oxid6/source/Setup'
-        export TEST_DIRS='unit'
+        export TEST_DIRS='unit,Unit'
         php /tmp/oxid6/vendor/bin/runtests AllTestsUnit
