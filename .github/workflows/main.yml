@@ -10,16 +10,20 @@ jobs:
       fail-fast: false
       matrix:
         operating-system: [ubuntu-latest]
-        php-versions: ['7.4']
-        db-versions: ['mysql:5.5']
-        oxid-versions: ['dev-b-6.2-ce']
+        php-versions: ['5.6', '7.0', '7.1', '7.2', '7.3', '7.4']
+        db-versions: ['5.5', '5.7']
+        oxid-versions: ['6.0', '6.1', '6.2']
         exclude:
-          - php-versions: '7.1'
-            oxid-versions: 'dev-b-6.2-ce'    
-    name: Oxid ${{ matrix.oxid-versions }}/PHP ${{ matrix.php-versions }}/DB ${{ matrix.db-versions }}
+          - php-versions: '5.6'
+            oxid-versions: '6.1'
+          - php-versions: '5.6'
+            oxid-versions: '6.2'
+          - php-versions: '7.0'
+            oxid-versions: '6.2'
+    name: Oxid ${{ matrix.oxid-versions }}/PHP ${{ matrix.php-versions }}/MySQL ${{ matrix.db-versions }}
     services:
       mysql:
-        image: ${{ matrix.db-versions }}
+        image: mysql:${{ matrix.db-versions }}
         env:
           MYSQL_ROOT_PASSWORD: root
         ports:
@@ -50,7 +54,7 @@ jobs:
       run: |
         mkdir /tmp/oxid6
         cd /tmp/oxid6
-        composer create-project -n --no-install --no-progress oxid-esales/oxideshop-project . ${{ matrix.oxid-versions }}
+        composer create-project -n --no-install --no-progress oxid-esales/oxideshop-project . dev-b-${{ matrix.oxid-versions }}-ce
         composer config repositories.payone-gmbh/oxid-6 path $GITHUB_WORKSPACE
         composer config minimum-stability dev
         composer install --dry-run --no-ansi &> packagelist
