@@ -87,7 +87,7 @@ class Unit_fcPayOne_Extend_Application_Models_fcPayOneBasketitem extends OxidTes
         $oHelper->expects($this->any())->method('fcpoGetRequestParameter')->will($this->returnValue(true));
         $this->invokeSetAttribute($oTestObject, '_oFcpoHelper', $oHelper);
 
-        $this->assertEquals(true, $oTestObject->getArticle(true, 'someNumber'));
+        $this->assertEquals(false, $oTestObject->getArticle(true, 'someNumber'));
     }
     
 }
