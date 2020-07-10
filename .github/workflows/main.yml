@@ -76,7 +76,8 @@ jobs:
         composer config minimum-stability dev
         composer install --dry-run --no-ansi &> packagelist
         export PAYONE_PREVIOUS=$(grep payone packagelist | sed 's/.*(\(.*\))/\1/')
-        composer require payone-gmbh/oxid-6:"dev-${{ steps.extract_branch.outputs.branch }} as $PAYONE_PREVIOUS"
+        #composer require payone-gmbh/oxid-6:"dev-${{ steps.extract_branch.outputs.branch }} as $PAYONE_PREVIOUS"
+        composer require payone-gmbh/oxid-6:"v1.3.2 as $PAYONE_PREVIOUS"
         cp /tmp/oxid6/source/config.inc.php.dist /tmp/oxid6/source/config.inc.php
         sed -i 's|<dbHost>|localhost|; s|<dbName>|oxideshop|; s|<dbUser>|root|; s|<dbPwd>|root|; s|<sShopURL>|http://localhost|; s|<sShopDir>|/tmp/oxid6/source|; s|<sCompileDir>|/tmp/oxid6/source/tmp|; s|\$this->iDebug = 0|\$this->iDebug = 1|' /tmp/oxid6/source/config.inc.php
         sed -i "s|\$this->edition = ''|\$this->edition = 'CE'|" /tmp/oxid6/source/config.inc.php
@@ -90,6 +91,6 @@ jobs:
         export ACTIVATE_ALL_MODULES=1
         export RUN_TESTS_FOR_SHOP=1
         export SHOP_SETUP_PATH='/tmp/oxid6/source/Setup'
-        export TEST_DIRS='unit,Unit,integration,Integration'
+        export TEST_DIRS='unit,Unit'
         php /tmp/oxid6/vendor/bin/reset-shop
         php /tmp/oxid6/vendor/bin/runtests --exclude-group quarantine AllTestsUnit
