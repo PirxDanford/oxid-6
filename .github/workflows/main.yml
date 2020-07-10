@@ -90,5 +90,6 @@ jobs:
         export ACTIVATE_ALL_MODULES=1
         export RUN_TESTS_FOR_SHOP=1
         export SHOP_SETUP_PATH='/tmp/oxid6/source/Setup'
-        export TEST_DIRS='unit,Unit'
-        php /tmp/oxid6/vendor/bin/runtests AllTestsUnit
+        export TEST_DIRS='unit,Unit,integration,Integration'
+        php /tmp/oxid6/vendor/bin/reset-shop
+        php /tmp/oxid6/vendor/bin/runtests --exclude-group quarantine AllTestsUnit
