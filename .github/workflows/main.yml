@@ -86,6 +86,7 @@ jobs:
       run: |
         export PARTIAL_MODULE_PATHS='fc/fcpayone'
         export SHOP_PATH='/tmp/oxid6/source'
+        export SHOP_TESTS_PATH='/tmp/oxid6/vendor/oxid-esales/oxideshop-ce/tests'
         export ACTIVATE_ALL_MODULES=1
         export RUN_TESTS_FOR_SHOP=1
         export SHOP_SETUP_PATH='/tmp/oxid6/source/Setup'
